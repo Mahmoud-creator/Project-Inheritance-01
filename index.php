@@ -1,3 +1,4 @@
+<?php include_once 'DB/DBZero.php' ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

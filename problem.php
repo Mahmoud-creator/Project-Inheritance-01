@@ -2,19 +2,53 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Results</title>
+    <title>Inheritance</title>
   </head>
-  <body>
+  <body style="background-color:grey">
+
+    <form action="" method="post">
+    Gender:   male<input type="radio" name="gender" value="m" checked="checked">
+              female<input type="radio" name="gender" value="f">
+    <br>
+    money:<input type="number" name="money" value="6000">
+    <br>
+    sons:<input type="number" name="sons" value="1">
+    <br>
+    daughters:<input type="number" name="daughters" value="2">
+    <br>
+    father:   alive<input type="radio" name="father" value="true">
+              dead<input type="radio" name="father" value="false" checked="checked">
+    <br>
+    mother:   alive<input type="radio" name="mother" value="true">
+              dead<input type="radio" name="mother" value="false" checked="checked">
+    <br>
+    husband:   alive<input type="radio" name="husband" value="true">
+              dead<input type="radio" name="husband" value="false" checked="checked">
+    <br>
+    wifes:<input type="number" name="wifes" value="0">
+    <br>
+    siblings:<input type="number" name="siblings" value="0">
+    <br>
+    brothers:<input type="number" name="brothers" value="0">
+    <br>
+    sisters:<input type="number" name="sisters" value="0">
+    <br>
+    uncles:<input type="number" name="uncles" value="0">
+    <br>
+    submit:<input type="submit" name="submit" value="submit">
+    <br>
+
+    </form>
 
     <?php
     // The start of the program
           $gender = "m";
           $son = 0;
           $daughter = 1;
-          $father = "false";
-          $mother = "false";
+          $father = false;
+          $mother = false;
           $wife = 0;
-          $husband = "false";
+          $husband = false;
           $brothers = 0;
           $sisters = 0;
           $StepSiblingsMotherSide = 0;
@@ -65,9 +99,9 @@
 
     		// Husband Share
 
-    		if($husband == "true") {
+    		if($husband === true) {
     			// Husband without kids
-    			if($son+$daughter == 0) {
+    			if($son+$daughter === 0) {
     			$husbandShare = 1.0/2;
     			}else {
     			// Husband with kids
@@ -90,10 +124,10 @@
     					// parents with kids
     				if ($son+$daughter >0) {
 
-    					if($father == "true") {
+    					if($father) {
     					$fatherShare = 1.0/6;
     					}
-    					if($mother == "true") {
+    					if($mother) {
     					$motherShare = 1.0/6;
     					}
 
@@ -101,21 +135,21 @@
     				}else{
     					// parents with siblings
     					if($brothers+$sisters+$StepSiblingsMotherSide > 1) {
-    						if($mother == "true") {
+    						if($mother) {
     						$motherShare = 1.0/6;
     						}
 
     					// parents without siblings
     					}else {
-    						if(($husband == "true"|| $wife>0) && $brothers+$sisters+$StepSiblingsMotherSide == 0 ){
+    						if(($husband || $wife>0) && $brothers+$sisters+$StepSiblingsMotherSide === 0 ){
 
     							// The Omar's Questions
-    							if($mother == "true") {
+    							if($mother) {
     							$motherShare =( (1-$husbandShare-$wifeShare*$wife) ) * (1.0/3);
     							}
 
     						}else {
-    							if($mother == "true") {
+    							if($mother) {
     							$motherShare = 1.0/3;
     							}
 
@@ -125,7 +159,7 @@
 
     		// Step Siblings Mother Side Share
 
-    		if($father == "false" && $son+$daughter === 0) {
+    		if(!$father && $son+$daughter === 0) {
     			if($StepSiblingsMotherSide === 1) {
             $StepSiblingsMotherSideShare = 1.0/6;
     			}else if($StepSiblingsMotherSide > 1){
@@ -136,9 +170,9 @@
 
 
     		// Sisters Share
-    		if($father == "false" && $brothers === 0 && $daughter+$son === 0 && $sisters === 1) {
+    		if(!$father && $brothers === 0 && $daughter+$son === 0 && $sisters === 1) {
     			$sistersShare = 1.0/2;
-    		}else if($father == "false" && $brothers === 0 && $daughter+$son === 0 && $sisters >1){
+    		}else if(!$father && $brothers === 0 && $daughter+$son === 0 && $sisters >1){
     			$sistersShare = (2.0/3)/$sisters;
     		}
 
@@ -187,7 +221,7 @@
     			}else if($son > 0 && $daughter == 0) {
     				// only sons Share
     				$sonShare = (1-$sumOfFards)/$son;
-    			}else if($father == "true") {
+    			}else if($father) {
     				// father share
     				$fatherShare = $fatherShare + (1-$sumOfFards);
     			}else if($brothers > 0 && $sisters > 0) {
@@ -210,12 +244,12 @@
 
     				// A	.	L	.	R	.	A	.	D
 
-    					if($wife==0 && $husband == "false") {
+    					if($wife===0 && !$husband) {
     						$daughterShare = $daughterShare/$sumOfFards;
     						$motherShare = $motherShare/$sumOfFards;
     						$StepSiblingsMotherSideShare = $StepSiblingsMotherSideShare/$sumOfFards;
     						$sistersShare = $sistersShare/$sumOfFards;
-    					}else if($wife > 0 or $husband == "true") {
+    					}else if($wife > 0 || $husband) {
     						$remain = 1 - ($husbandShare + $wifeShare*$wife);
     						$sumOfFards = ($daughterShare*$daughter) + $motherShare
     								+ ($StepSiblingsMotherSideShare*$StepSiblingsMotherSide) + ($sistersShare*$sisters);
@@ -241,12 +275,12 @@
     		// Test Result
   		  echo "The Shares will be as follows :";
         echo "<br>";
-    		if($father == "true") {
+    		if($father) {
     			echo"father Share = ".($fatherShare*$x)." $";
           echo "<br>";
 
     		}
-    		if($mother == "true") {
+    		if($mother) {
           echo"mother Share = ".($motherShare*$x)." $";
           echo "<br>";
 
@@ -261,7 +295,7 @@
           echo "<br>";
 
     		}
-    		if($husband == "true") {
+    		if($husband) {
           echo"husband Share = ".($husbandShare*$x)." $";
           echo "<br>";
 

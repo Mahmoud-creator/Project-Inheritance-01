@@ -160,35 +160,11 @@ body {
   border-radius: 10px;
 }
 
-.login-box1 {
-  position: absolute;
-  top: 20%;
-  left: 60%;
-  width: 400px;
-  padding: 40px;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,.5);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
-  border-radius: 10px;
-}
-.login-box2 {
-  position: absolute;
-  top: 55%;
-  left: 60%;
-  width: 400px;
-  padding: 40px;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,.5);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
-  border-radius: 10px;
-}
 .login-box3 {
   position: absolute;
   top: 88%;
   left: 91%;
-  width: 220px;
+  width: 240px;
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0,0,0,.5);
@@ -260,7 +236,8 @@ body {
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;
-  background: transparent;
+  background: transparent;4
+  readonly;
 }
 .login-box .user-box input:focus ~ label,
 .login-box .user-box input:valid ~ label {
